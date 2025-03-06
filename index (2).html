@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">pythonvirt
+    <title>Real-Time Translation</title>
+</head>
+<body>
+    <h2>Real-Time Language Translation</h2>
+    <input type="text" id="inputText" placeholder="Enter text to translate">
+    <button onclick="translateText()">Translate</button>
+    <p id="outputText"></p>
+
+    <script>
+        async function translateText() {
+            const inputText = document.getElementById("inputText").value;
+            const response = await fetch("/translate", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ text: inputText })
+            });
+
+            const data = await response.json();
+            document.getElementById("outputText").innerText = "Translated: " + data.translated_text;
+        }
+    </script>
+</body>
+</html>
